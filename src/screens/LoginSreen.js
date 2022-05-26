@@ -7,7 +7,7 @@ import {
 import { BtnDefault } from "../components/btn";
 
 import { Ionicons } from '@expo/vector-icons';
-
+import AppFooter from "../components/AppFooter"
 
 
 
@@ -25,10 +25,13 @@ const LoginScreen = ({ navigation }) => {
             <View style={styles.container}>
                 <Text style={styles.title}>Expense Manager</Text>
                 <View style={styles.lineH} />
-                <View> <Text
-                    style={inputF[0] ? styles.textFocus : styles.text}>Username</Text>
+                <View>
 
 
+
+
+
+                    <Text style={inputF[0] ? styles.textFocus : styles.text}>Username</Text>
                     <TextInput
                         onFocus={() => setInputF([true, false])}
                         value={username}
@@ -43,9 +46,12 @@ const LoginScreen = ({ navigation }) => {
                             value={password}
                             onChangeText={setPassword}
                             secureTextEntry={sPassword} />
+
                         <TouchableOpacity onPress={() => setSpassword(!sPassword)}>
-                            <View    > {sPassword ? <Ionicons name="eye" size={24} color="black" />
-                                : <Ionicons name="eye-off" size={24} color="black" />}</View>
+                            <View>{sPassword ? <Ionicons name="eye"
+                                size={24} color="black" />
+                                : <Ionicons name="eye-off" size={24} color="black" />}
+                            </View>
                         </TouchableOpacity>
                     </View>
                     <View style={styles.loginCon}>
@@ -54,41 +60,8 @@ const LoginScreen = ({ navigation }) => {
                             title={"Login"}
                             style={styles.login} /></View>
                 </View>
-
-
-
             </View>
-            <View style={styles.footer}>
-                <View style={styles.footerItem}>
-                    <Text style={styles.text}>Fork me </Text>
-
-                    <TouchableOpacity onPress={async () => {
-                        const url = "https://github.com/SoftCareTech"
-                        const supported = await Linking.canOpenURL(url);
-                        if (supported) {
-                            await Linking.openURL(url);
-                        } else {
-                            Alert.alert(`Don't know how to open this URL: ${url}`);
-                        }
-                    }}>
-                        <Text style={styles.textFocus}>on Github</Text>
-                    </TouchableOpacity>
-                </View>
-                <View style={styles.footerItem}>
-                    <Text style={styles.text}>Build with </Text>
-                    <TouchableOpacity onPress={async () => {
-                        const url = "https://expo.dev/"
-                        const supported = await Linking.canOpenURL(url);
-                        if (supported) {
-                            await Linking.openURL(url);
-                        } else {
-                            Alert.alert(`Don't know how to open this URL: ${url}`);
-                        }
-                    }}>
-                        <Text style={styles.textFocus}>React natve</Text>
-                    </TouchableOpacity>
-                </View>
-            </View>
+            <AppFooter />
         </View >
 
 
@@ -154,7 +127,9 @@ const styles = StyleSheet.create({
 
     }
     , sPassword: {
-        flexDirection: "row"
+        flexDirection: "row",
+        backgroundColor: "#36485f",
+        alignItems: "center"
 
     }
     , footer: {

@@ -67,7 +67,9 @@ const styles = StyleSheet.create({
         color: "#2a7fef",
     }
     ,
-
+    textFocus: {
+        color: "#2a7fef",
+    },
     footer: {
         flex: -1,
         width: Dimensions.get('window').width,

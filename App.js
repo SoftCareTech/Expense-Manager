@@ -16,7 +16,7 @@ const Stack = createNativeStackNavigator();
 
 
 function ExpenseStack() {
-  //initialRouteName='ShareLinks'
+
   return (
     <Stack.Navigator initialRouteName="Expense" >
       <Stack.Screen name="Login" component={LoginScreen} options={{ headerShown: false }} />
@@ -30,9 +30,6 @@ const App = () => (
   <NavigationContainer>
     <ExpenseStack />
   </NavigationContainer>
-
-
-
 );
 
 export default App 

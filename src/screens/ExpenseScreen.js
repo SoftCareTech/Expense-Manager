@@ -410,33 +410,32 @@ const ExpenseScreen = ({ navigation }) => {
                             title={"Logout"} onPress={() => navigation.goBack()} />
                     </View>
                 </View>
-                <View style={{ width: Dimensions.get('window').width - 32, }}>
-                    {Dimensions.get('window').width < 700 ? <View style={[styles.panItem, {
-                        flexDirection: "row", justifyContent: "space-between"
-                    }]}>
-                        <View style={styles.text}>
-                            <Text  >To be reimbursed</Text>
-                            <Text>
-                                ${reimbursed}
-                            </Text>
+                <View style={{ width: Dimensions.get('window').width - 32, }}>{Dimensions.get('window').width < 700 ? <View style={[styles.panItem, {
+                    flexDirection: "row", justifyContent: "space-between"
+                }]}>
+                    <View style={styles.text}>
+                        <Text  >To be reimbursed</Text>
+                        <Text>
+                            ${reimbursed}
+                        </Text>
+                    </View>
+                    <TouchableOpacity onPress={() => {
+                        SetShowFilter(!showFilter)
+                    }}>
+                        <View style={[styles.headItem, { alignContent: "center" }]}>
+                            <Text style={{ color: "#2a7fef" }} >Filter {filterCount == 0 ?
+                                null : filterCount}</Text>
+                            <MaterialCommunityIcons name="filter-variant" size={24}
+                                color="#2a7fef" />
+
                         </View>
-                        <TouchableOpacity onPress={() => {
-                            SetShowFilter(!showFilter)
-                        }}>
-                            <View style={[styles.headItem, { alignContent: "center" }]}>
-                                <Text style={{ color: "#2a7fef" }} >Filter {filterCount == 0 ?
-                                    null : filterCount}</Text>
-                                <MaterialCommunityIcons name="filter-variant" size={24}
-                                    color="#2a7fef" />
-
-                            </View>
-                        </TouchableOpacity>
+                    </TouchableOpacity>
 
 
 
-                    </View> : null
+                </View> : null
 
-                    }</View>
+                }</View>
 
                 <View style={styles.pan}>
                     {showFilter ? FilterPan() : null}
