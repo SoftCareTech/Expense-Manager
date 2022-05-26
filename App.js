@@ -1,20 +1,38 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
 
-export default function App() {
+//Navigators
+import * as React from 'react';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+
+//Screens 
+import LoginScreen from './src/screens/LoginSreen'
+import ProfileScreen from './src/screens/ProfileScreen';
+import ExpenseScreen from './src/screens/ExpenseScreen';
+
+//Providers 
+
+
+const Stack = createNativeStackNavigator();
+
+
+function ExpenseStack() {
+  //initialRouteName='ShareLinks'
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <Stack.Navigator initialRouteName="Expense" >
+      <Stack.Screen name="Login" component={LoginScreen} options={{ headerShown: false }} />
+      <Stack.Screen name="Profile" component={ProfileScreen} options={{ headerShown: false }} />
+      <Stack.Screen name="Expense" component={ExpenseScreen} options={{ headerShown: false }} />
+    </Stack.Navigator>
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+const App = () => (
+  <NavigationContainer>
+    <ExpenseStack />
+  </NavigationContainer>
+
+
+
+);
+
+export default App 
