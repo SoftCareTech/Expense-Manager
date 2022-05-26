@@ -95,6 +95,7 @@ const ExpenseScreen = ({ navigation }) => {
                 labelField="name"
                 valueField="name"
                 value={merchantF}
+                placeholder={""}
                 onChange={item => {
                     setMerchantF(item.name);
                 }}
@@ -272,7 +273,7 @@ const ExpenseScreen = ({ navigation }) => {
             else setSort({ index: index, click: 1 })
         }
 
-        return (<View style={[styles.panItem, { flex: 2 }]}>
+        return (<View style={[styles.panItem, { flex: 2, backgroundColor: "white" }]}>
 
             {Dimensions.get('window').width >= 700 ? add() : null}
             <Table
@@ -403,10 +404,10 @@ const ExpenseScreen = ({ navigation }) => {
                 <View style={styles.header}>
                     <Text style={styles.title}>Expense Manager</Text>
 
-                    <View style={{ flexDirection: 'row', alignContent: "flex-end", backgroundColor: 'red' }}>
-                        <BtnText title={"Profile"} style={styles.btnHead}
+                    <View style={{ flexDirection: 'row', alignContent: "flex-end", }}>
+                        <BtnDefault title={"Profile"} style={styles.btnHead}
                             onPress={() => navigation.replace('Profile')} />
-                        <BtnText style={styles.btnHead}
+                        <BtnDefault style={styles.btnHead}
                             title={"Logout"} onPress={() => navigation.goBack()} />
                     </View>
                 </View>
@@ -427,7 +428,6 @@ const ExpenseScreen = ({ navigation }) => {
                                 null : filterCount}</Text>
                             <MaterialCommunityIcons name="filter-variant" size={24}
                                 color="#2a7fef" />
-
                         </View>
                     </TouchableOpacity>
 
