@@ -12,6 +12,7 @@ const PopConfirm = ({ show, onResult = (b) => { console.error("Pls listen to con
 
     show.current = (d) => {
         setData(d)
+        console.log(data)
         setVisibility(true)
     }
     message = data.msg ? data.msg : message

@@ -1,5 +1,6 @@
 
-import React, { useState } from "react";
+import React, { useState, useCallback } from "react";
+import EditProfile from "../components/EditProfile";
 import {
     StyleSheet, View, Text, TextInput,
     Dimensions, TouchableOpacity, Button, Linking, Image, ScrollView,
@@ -15,32 +16,80 @@ const TextX = ({ title, children }) => {
     </View>
 
 }
+import { useFocusEffect } from '@react-navigation/native';
 
 import imgSrc from '../../assets/RaphProfile.png'
+import * as DocumentPicker from 'expo-document-picker';
+import { db } from "../databaseR";
+import AppFooter from "../components/AppFooter";
 const ProfileScreen = ({ navigation }) => {
+
+    const show = React.useRef(null)
+    const [data, setData] = useState({
+        name: "Gbenge A Raphael",
+        imageUri: null
+        , location: "Nigeria Benue state",
+        department: "Engineering",
+        description: "Mobile Engineer -- Android = java/kotlin/ and react-native./"
+    })
+
+
+
+    useFocusEffect(
+        React.useCallback(() => {
+            const load = async () => {
+                try {
+                    const r = await db.findAsync({ _id: "_profile" })
+                    if (r) setData(r[0])
+
+                } catch (e) {
+
+                }
+
+            }
+            load();
+        }, [])
+    );
+
+
+
 
     return (
         <View style={styles.container_}>
+
             <View style={styles.container}>
                 <Text style={styles.title}>Expense Manager</Text>
+
                 <View style={styles.header}>
                     <View style={styles.imgContainer}>
 
                         <Image
                             style={styles.img}
-                            source={{ uri: imgSrc }} />
+                            source={{ uri: data.imageUri ? data.imageUri : imgSrc }} />
                         <View style={{
                             flexDirection: "row",
                             alignContent: "center", justifyContent: "center",
                             alignItems: "center"
                         }}>
-                            <Text style={styles.textB}>Gbenge A Raphael</Text>
+                            <Text style={styles.textB}>{data.name}</Text>
                             <BtnText style={styles.editBtn}
-                                title={"Edit"} onPress={() => {
+                                title={"Edit"} onPress={async () => {
+                                    show.current(data)
 
                                 }} />
                         </View>
+                        <EditProfile show={show} onResult={async (data) => {
 
+                            if (data) try {
+
+                                const r = await db.updateAsync({
+                                    _id: "_profile"
+                                }, { $set: data }, { upsert: true });
+                                console.log(r, data)
+                            } catch (e) {
+                                console.log("Error", e)
+                            }
+                        }} />
                     </View>
                     <View style={{ flexDirection: 'row' }}>
                         <BtnDefault title={"Expense"} style={styles.btn}
@@ -53,15 +102,13 @@ const ProfileScreen = ({ navigation }) => {
 
                 <View style={styles.lineH} />
 
-
-
                 <ScrollView style={{ margin: 16 }}>
                     <TextX title={"Job description"}>
-                        <Text style={styles.textB}>Mobile Engineer -- Android = java/kotlin/ and react-native./</Text></TextX>
+                        <Text style={styles.textB}>{data.description}</Text></TextX>
                     <TextX title={"Location"}>
-                        <Text style={styles.textB}>Nigeria-Benue state</Text></TextX>
+                        <Text style={styles.textB}>{data.location}</Text></TextX>
                     <TextX title={"Department"}>
-                        <Text style={styles.textB}>Engineering</Text></TextX>
+                        <Text style={styles.textB}>{data.location}</Text></TextX>
 
                 </ScrollView>
 
@@ -70,37 +117,8 @@ const ProfileScreen = ({ navigation }) => {
 
 
             </View>
-            <View style={styles.footer}>
-                <View style={styles.footerItem}>
-                    <Text style={styles.text}>Fork me </Text>
+            <AppFooter />
 
-                    <TouchableOpacity onPress={async () => {
-                        const url = "https://github.com/SoftCareTech"
-                        const supported = await Linking.canOpenURL(url);
-                        if (supported) {
-                            await Linking.openURL(url);
-                        } else {
-                            Alert.alert(`Don't know how to open this URL: ${url}`);
-                        }
-                    }}>
-                        <Text style={styles.textFocus}>on Github</Text>
-                    </TouchableOpacity>
-                </View>
-                <View style={styles.footerItem}>
-                    <Text style={styles.text}>Build with </Text>
-                    <TouchableOpacity onPress={async () => {
-                        const url = "https://expo.dev/"
-                        const supported = await Linking.canOpenURL(url);
-                        if (supported) {
-                            await Linking.openURL(url);
-                        } else {
-                            Alert.alert(`Don't know how to open this URL: ${url}`);
-                        }
-                    }}>
-                        <Text style={styles.textFocus}>React natve</Text>
-                    </TouchableOpacity>
-                </View>
-            </View>
         </View >
 
 
@@ -185,6 +203,13 @@ const styles = StyleSheet.create({
 
     },
 
+    input: {
+        color: "#F5F5F5",
+        opacity: 0.9,
+        fontSize: 20,
+        height: 50
+    },
+
 
     lineH: {
         height: 5
@@ -219,21 +244,6 @@ const styles = StyleSheet.create({
         width: Dimensions.get('window').width - 32,
     },
 
-
-    footer: {
-        flex: -1,
-        width: Dimensions.get('window').width,
-        flexDirection: "row",
-        alignItems: 'center',
-        backgroundColor: "#36485f",
-        justifyContent: "space-between"
-    },
-    footerItem: {
-        flex: -1,
-        flexDirection: "row",
-        alignItems: 'center'
-        , padding: 8
-    }
 
 
 

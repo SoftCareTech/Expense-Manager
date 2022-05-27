@@ -18,7 +18,7 @@ const Stack = createNativeStackNavigator();
 function ExpenseStack() {
 
   return (
-    <Stack.Navigator initialRouteName="Login" >
+    <Stack.Navigator initialRouteName="Profile" >
       <Stack.Screen name="Login" component={LoginScreen} options={{ headerShown: false }} />
       <Stack.Screen name="Profile" component={ProfileScreen} options={{ headerShown: false }} />
       <Stack.Screen name="Expense" component={ExpenseScreen} options={{ headerShown: false }} />
