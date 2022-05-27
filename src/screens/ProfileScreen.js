@@ -17,7 +17,6 @@ const TextX = ({ title, children }) => {
 
 }
 import { useFocusEffect } from '@react-navigation/native';
-
 import imgSrc from '../../assets/RaphProfile.png'
 import * as DocumentPicker from 'expo-document-picker';
 import { db } from "../databaseR";
@@ -40,7 +39,7 @@ const ProfileScreen = ({ navigation }) => {
             const load = async () => {
                 try {
                     const r = await db.findAsync({ _id: "_profile" })
-                    if (r) setData(r[0])
+                    if (r) if (r[0]) setData(r[0])
 
                 } catch (e) {
 

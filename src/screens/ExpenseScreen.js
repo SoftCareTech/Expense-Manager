@@ -10,9 +10,12 @@ import { BtnDefault, BtnText } from "../components/btn";
 import { Table, TableWrapper, Row, Rows, Col, Cols, Cell } from 'react-native-table-component';
 import Checkbox from 'expo-checkbox';
 import { Dropdown } from 'react-native-element-dropdown';
+import { useFocusEffect } from '@react-navigation/native';
 
 ///icon 
 import { MaterialCommunityIcons, FontAwesome, Ionicons } from '@expo/vector-icons';
+import { getData } from "../databaseR";
+import AddExpense from "./AddExpense";
 
 const ExpenseScreen = ({ navigation }) => {
     const DateTimePicker = ({ value, onChange, style }) => {
@@ -136,6 +139,7 @@ const ExpenseScreen = ({ navigation }) => {
         flex: -1, position: 'absolute', bottom: 20, right: 0,
         backgroundColor: "white"
     }}>  <TouchableOpacity onPress={() => {
+        setAddPop(true)
 
     }}><Ionicons
                 name="add-circle-sharp" size={50} color="#ff4238" /></TouchableOpacity>
@@ -352,34 +356,27 @@ const ExpenseScreen = ({ navigation }) => {
     { name: "Shuttle" }, { name: "Electronics" },
     { name: "Office supplies" }, { name: "Hotel" },
     ]
-    const data = [
-        {
-            date: "09/03/2022", merchant: "Shuttle",
-            total: 89.00, status: "Is Progress", comment: "New comment"
-        },
-        {
-            date: "05/03/2022", merchant: "Office supplies",
-            total: 100.00, status: "Is Progress", comment: "New comment"
-        }, {
-            date: "05/08/2022", merchant: "Airline",
-            total: 100.00, status: "New", comment: "New comment"
-        }, {
-            date: "07/03/2022", merchant: "Breakfast",
-            total: 10, status: "Reimbursed", comment: "Zee"
-        }, {
-            date: "05/04/2022", merchant: "Electronics",
-            total: 50.00, status: "New", comment: "Better comment"
-        }, {
-            date: "05/03/2022", merchant: "Fast food",
-            total: 100.00, status: "Reimbursed", comment: "A comment"
-        }, {
-            date: "05/03/2022", merchant: "Fast food",
-            total: 100.00, status: "Is Progress", comment: "New comment"
-        }
-    ]
+
+    const [data, setData] = useState([])
+    useFocusEffect(
+        React.useCallback(() => {
+            const load = async () => {
+                try {
+                    const data = await getData()
+                    setData(data)
+                } catch (e) {
+                    console.log("Error", e)
+                }
+
+            }
+            load();
+        }, [])
+    );
 
 
 
+
+    const [addPop, setAddPop] = useState(false)
     const [showFilter, SetShowFilter] = useState(Dimensions.get('window').width > 700)
     const [startF, setStartF] = useState("")
     const [endF, setEndF] = useState("")
@@ -453,6 +450,10 @@ const ExpenseScreen = ({ navigation }) => {
             </View>
 
             {Dimensions.get('window').width < 700 ? add() : null}
+
+            <AddExpense visibility={addPop} changeVisibility={() => {
+                setAddPop(!addPop)
+            }} />
         </View>
     );
 }
