@@ -14,7 +14,6 @@ const db = new Datastore({
     autoload: true
 });
 const getData = async () => {
-
     let d = await db.findAsync({})
     if (d.length < 3) {
         await db.insertAsync(data)
@@ -65,6 +64,190 @@ const data = [
     }, {
         date: "05/03/2022", merchant: "Fast food",
         total: 100.00, status: "Reimbursed", comment: "A comment"
+    }, {
+        date: "05/03/2022", merchant: "Fast food",
+        total: 100.00, status: "Is Progress", comment: "New comment"
+    }
+    , {
+        date: "05/03/2022", merchant: "Fast food",
+        total: 100.00, status: "Is Progress", comment: "New comment"
+    }, {
+        date: "05/03/2022", merchant: "Fast food",
+        total: 100.00, status: "Is Progress", comment: "New comment"
+    }, {
+        date: "05/03/2022", merchant: "Fast food",
+        total: 100.00, status: "Is Progress", comment: "New comment"
+    }, {
+        date: "05/03/2022", merchant: "Fast food",
+        total: 100.00, status: "Is Progress", comment: "New comment"
+    }, {
+        date: "05/03/2022", merchant: "Fast food",
+        total: 100.00, status: "Is Progress", comment: "New comment"
+    }, {
+        date: "05/03/2022", merchant: "Fast food",
+        total: 100.00, status: "Is Progress", comment: "New comment"
+    }, {
+        date: "05/03/2022", merchant: "Fast food",
+        total: 100.00, status: "Is Progress", comment: "New comment"
+    }, {
+        date: "05/03/2022", merchant: "Fast food",
+        total: 100.00, status: "Is Progress", comment: "New comment"
+    }, {
+        date: "05/03/2022", merchant: "Fast food",
+        total: 100.00, status: "Is Progress", comment: "New comment"
+    }, {
+        date: "05/03/2022", merchant: "Fast food",
+        total: 100.00, status: "Is Progress", comment: "New comment"
+    }, {
+        date: "05/03/2022", merchant: "Fast food",
+        total: 100.00, status: "Is Progress", comment: "New comment"
+    }, {
+        date: "05/03/2022", merchant: "Fast food",
+        total: 100.00, status: "Is Progress", comment: "New comment"
+    }, {
+        date: "05/03/2022", merchant: "Fast food",
+        total: 100.00, status: "Is Progress", comment: "New comment"
+    }, {
+        date: "05/03/2022", merchant: "Fast food",
+        total: 100.00, status: "Is Progress", comment: "New comment"
+    }, {
+        date: "05/03/2022", merchant: "Fast food",
+        total: 100.00, status: "Is Progress", comment: "New comment"
+    }, {
+        date: "05/03/2022", merchant: "Fast food",
+        total: 100.00, status: "Is Progress", comment: "New comment"
+    }, {
+        date: "05/03/2022", merchant: "Fast food",
+        total: 100.00, status: "Is Progress", comment: "New comment"
+    }, {
+        date: "05/03/2022", merchant: "Fast food",
+        total: 100.00, status: "Is Progress", comment: "New comment"
+    }, {
+        date: "05/03/2022", merchant: "Fast food",
+        total: 100.00, status: "Is Progress", comment: "New comment"
+    }, {
+        date: "05/03/2022", merchant: "Fast food",
+        total: 100.00, status: "Is Progress", comment: "New comment"
+    }, {
+        date: "05/03/2022", merchant: "Fast food",
+        total: 100.00, status: "Is Progress", comment: "New comment"
+    }, {
+        date: "05/03/2022", merchant: "Fast food",
+        total: 100.00, status: "Is Progress", comment: "New comment"
+    }, {
+        date: "05/03/2022", merchant: "Fast food",
+        total: 100.00, status: "Is Progress", comment: "New comment"
+    }, {
+        date: "05/03/2022", merchant: "Fast food",
+        total: 100.00, status: "Is Progress", comment: "New comment"
+    }, {
+        date: "05/03/2022", merchant: "Fast food",
+        total: 100.00, status: "Is Progress", comment: "New comment"
+    }, {
+        date: "05/03/2022", merchant: "Fast food",
+        total: 100.00, status: "Is Progress", comment: "New comment"
+    }, {
+        date: "05/03/2022", merchant: "Fast food",
+        total: 100.00, status: "Is Progress", comment: "New comment"
+    }, {
+        date: "05/03/2022", merchant: "Fast food",
+        total: 100.00, status: "Is Progress", comment: "New comment"
+    }, {
+        date: "05/03/2022", merchant: "Fast food",
+        total: 100.00, status: "Is Progress", comment: "New comment"
+    }, {
+        date: "05/03/2022", merchant: "Fast food",
+        total: 100.00, status: "Is Progress", comment: "New comment"
+    }, {
+        date: "05/03/2022", merchant: "Fast food",
+        total: 100.00, status: "Is Progress", comment: "New comment"
+    }, {
+        date: "05/03/2022", merchant: "Fast food",
+        total: 100.00, status: "Is Progress", comment: "New comment"
+    }, {
+        date: "05/03/2022", merchant: "Fast food",
+        total: 100.00, status: "Is Progress", comment: "New comment"
+    }, {
+        date: "05/03/2022", merchant: "Fast food",
+        total: 100.00, status: "Is Progress", comment: "New comment"
+    }, {
+        date: "05/03/2022", merchant: "Fast food",
+        total: 100.00, status: "Is Progress", comment: "New comment"
+    }, {
+        date: "05/03/2022", merchant: "Fast food",
+        total: 100.00, status: "Is Progress", comment: "New comment"
+    }, {
+        date: "05/03/2022", merchant: "Fast food",
+        total: 100.00, status: "Is Progress", comment: "New comment"
+    }, {
+        date: "05/03/2022", merchant: "Fast food",
+        total: 100.00, status: "Is Progress", comment: "New comment"
+    }, {
+        date: "05/03/2022", merchant: "Fast food",
+        total: 100.00, status: "Is Progress", comment: "New comment"
+    }, {
+        date: "05/03/2022", merchant: "Fast food",
+        total: 100.00, status: "Is Progress", comment: "New comment"
+    }, {
+        date: "05/03/2022", merchant: "Fast food",
+        total: 100.00, status: "Is Progress", comment: "New comment"
+    }, {
+        date: "05/03/2022", merchant: "Fast food",
+        total: 100.00, status: "Is Progress", comment: "New comment"
+    }, {
+        date: "05/03/2022", merchant: "Fast food",
+        total: 100.00, status: "Is Progress", comment: "New comment"
+    }, {
+        date: "05/03/2022", merchant: "Fast food",
+        total: 100.00, status: "Is Progress", comment: "New comment"
+    }, {
+        date: "05/03/2022", merchant: "Fast food",
+        total: 100.00, status: "Is Progress", comment: "New comment"
+    }, {
+        date: "05/03/2022", merchant: "Fast food",
+        total: 100.00, status: "Is Progress", comment: "New comment"
+    }, {
+        date: "05/03/2022", merchant: "Fast food",
+        total: 100.00, status: "Is Progress", comment: "New comment"
+    }, {
+        date: "05/03/2022", merchant: "Fast food",
+        total: 100.00, status: "Is Progress", comment: "New comment"
+    }, {
+        date: "05/03/2022", merchant: "Fast food",
+        total: 100.00, status: "Is Progress", comment: "New comment"
+    }, {
+        date: "05/03/2022", merchant: "Fast food",
+        total: 100.00, status: "Is Progress", comment: "New comment"
+    }, {
+        date: "05/03/2022", merchant: "Fast food",
+        total: 100.00, status: "Is Progress", comment: "New comment"
+    }, {
+        date: "05/03/2022", merchant: "Fast food",
+        total: 100.00, status: "Is Progress", comment: "New comment"
+    }, {
+        date: "05/03/2022", merchant: "Fast food",
+        total: 100.00, status: "Is Progress", comment: "New comment"
+    }, {
+        date: "05/03/2022", merchant: "Fast food",
+        total: 100.00, status: "Is Progress", comment: "New comment"
+    }, {
+        date: "05/03/2022", merchant: "Fast food",
+        total: 100.00, status: "Is Progress", comment: "New comment"
+    }, {
+        date: "05/03/2022", merchant: "Fast food",
+        total: 100.00, status: "Is Progress", comment: "New comment"
+    }, {
+        date: "05/03/2022", merchant: "Fast food",
+        total: 100.00, status: "Is Progress", comment: "New comment"
+    }, {
+        date: "05/03/2022", merchant: "Fast food",
+        total: 100.00, status: "Is Progress", comment: "New comment"
+    }, {
+        date: "05/03/2022", merchant: "Fast food",
+        total: 100.00, status: "Is Progress", comment: "New comment"
+    }, {
+        date: "05/03/2022", merchant: "Fast food",
+        total: 100.00, status: "Is Progress", comment: "New comment"
     }, {
         date: "05/03/2022", merchant: "Fast food",
         total: 100.00, status: "Is Progress", comment: "New comment"

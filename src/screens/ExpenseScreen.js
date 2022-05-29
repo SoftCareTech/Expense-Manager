@@ -135,17 +135,14 @@ const ExpenseScreen = ({ navigation }) => {
         </View>)
     }
 
-    const add = () => <View style={{
-        flex: -1, position: 'absolute', bottom: 20, right: 0,
-        backgroundColor: "white"
-    }}>  <TouchableOpacity onPress={() => {
-        setAddPop(true)
-
-    }}><Ionicons
-                name="add-circle-sharp" size={50} color="#ff4238" /></TouchableOpacity>
+    const add = () =>
+        <TouchableOpacity onPress={() => { setAddPop(true) }}>
+            <Ionicons style={{ flex: -1, position: 'absolute', bottom: 20, right: 20 }}
+                name="add-circle-sharp" size={50} color="#ff4238" />
+        </TouchableOpacity>
 
 
-    </View>
+
 
 
 
@@ -261,8 +258,9 @@ const ExpenseScreen = ({ navigation }) => {
                 }
             }
         }
-        const tableData = sorted.map(d => [d.date, d.merchant, "$" + d.total, d.status, d.comment])
-
+        const tableData = sorted.map((d, i) => [i + " " + d.date, d.merchant, "$" + d.total,
+        d.status, d.comment])
+        const widthAtt = [100, 100, 100, 100, 220]
         const rowClicked = (index, data) => {
             console.log(`This is row ${index}`);
 
@@ -277,62 +275,102 @@ const ExpenseScreen = ({ navigation }) => {
             else setSort({ index: index, click: 1 })
         }
 
-        return (<View style={[styles.panItem, { flex: 2, backgroundColor: "white" }]}>
+        return (<View style={[styles.panItem, {
+            flex: 2, backgroundColor: "white",
 
-            {Dimensions.get('window').width >= 700 ? add() : null}
-            <Table
-                borderStyle={{ borderWidth: 0 }}>
-                <TableWrapper style={{
-                    flexDirection: 'row', borderBottomWidth: 2,
-                    borderBottomColor: "#dde2e8"
-                }}>
-                    {tableHead.map((title, col) => (
-                        <Cell key={col} data={
-                            <TouchableOpacity onPress={() =>
-                                titleClicked(col)}>
-                                {sort.index !== col || sort.click === 0 ?
-                                    <View style={styles.headItem} >
-                                        <Text style={styles.titleData}>{title}</Text>
-                                        <FontAwesome style={{ opacity: 0.1 }} name="unsorted" size={18} color="black" />
-                                    </View> : null}
+        }]}>
 
-                                {sort.index === col && sort.click == 1 ?
-                                    <View style={styles.headItem}>
-                                        <Text style={[styles.titleData, { color: "#2a7fef" }]}>{title}</Text>
-                                        <FontAwesome name="sort-down" size={18} color="#2a7fef" />
-                                    </View> : null}
+            <ScrollView horizontal={true}>
 
-                                {sort.index === col && sort.click == 2 ?
-                                    <View style={styles.headItem}>
-                                        <Text style={[styles.titleData, , { color: "#2a7fef" }]}>{title}</Text>
-                                        <FontAwesome name="sort-asc" size={18} color="#2a7fef" />
-                                    </View> : null}
-                            </TouchableOpacity>} />
-                    ))}
-                </TableWrapper>
-                <ScrollView>
-                    {tableData.map((rowData, index) => (
-                        <TableWrapper key={index} style={{
-                            flexDirection: 'row',
-                            marginTop: 2,
+
+                <View>
+                    <Table borderStyle={{ borderWidth: 0, borderColor: '#C1C0B9' }}>
+                        <TableWrapper style={{
+                            flexDirection: 'row', borderBottomWidth: 2, borderBottomColor: "#dde2e8", height: 50
                         }}>
+                            {tableHead.map((title, col) => (
+                                <Cell key={col}
+                                    width={widthAtt[col]}
+                                    data={
+                                        <TouchableOpacity onPress={() =>
+                                            titleClicked(col)}>
+                                            {sort.index !== col || sort.click === 0 ?
+                                                <View style={styles.headItem} >
+                                                    <Text style={styles.titleData}>{title}</Text>
+                                                    <FontAwesome style={{ opacity: 0.1 }} name="unsorted" size={18} color="black" />
+                                                </View> : null}
+
+                                            {sort.index === col && sort.click == 1 ?
+                                                <View style={styles.headItem}>
+                                                    <Text style={[styles.titleData, { color: "#2a7fef" }]}>{title}</Text>
+                                                    <FontAwesome name="sort-down" size={18} color="#2a7fef" />
+                                                </View> : null}
+
+                                            {sort.index === col && sort.click == 2 ?
+                                                <View style={styles.headItem}>
+                                                    <Text style={[styles.titleData, , { color: "#2a7fef" }]}>{title}</Text>
+                                                    <FontAwesome name="sort-asc" size={18} color="#2a7fef" />
+                                                </View> : null}
+                                        </TouchableOpacity>} />
+                            ))}
+                        </TableWrapper>
+                    </Table>
+                    <ScrollView style={styles.dataWrapper}>
+                        <Table borderStyle={{ borderWidth: 1, borderColor: '#C1C0B9' }}>
                             {
-                                rowData.map((cellData, cellIndex) => (
-                                    <Cell key={cellIndex} data={<TouchableOpacity key={cellIndex} onPress={() =>
-                                        rowClicked(cellIndex, cellData)}>
-                                        <Text style={styles.textData}>{cellData}</Text>
+                                tableData.map((rowData, index) => (
+                                    <TableWrapper widthArr={widthAtt}
+                                        style={[{ flexDirection: "row", height: 40, backgroundColor: '#E7E6E1' },
+                                        index % 2 && { backgroundColor: '#F7F6E7' }]}  >
+                                        {rowData.map((d, i) => (<Cell
+                                            width={widthAtt[i]}
+                                            key={i} data={d}
+                                            textStyle={{ textAlign: 'center', fontWeight: '100' }} />
 
-
-                                    </TouchableOpacity>} />
-
+                                        ))}
+                                    </TableWrapper>
                                 ))
                             }
-                        </TableWrapper>
-                    ))
-                    }
-                </ScrollView>
+                        </Table>
+                    </ScrollView>
+                </View>
 
-            </Table>
+
+
+
+
+                <View>
+                    <Table borderStyle={{ borderWidth: 1, borderColor: '#C1C0B9' }}>
+                        <Row data={tableHead} style={{ height: 50, backgroundColor: '#537791' }}
+                            textStyle={{ textAlign: 'center', fontWeight: '100' }}
+                            widthArr={widthAtt}
+                        />
+                    </Table>
+                    <ScrollView style={styles.dataWrapper}>
+                        <Table borderStyle={{ borderWidth: 1, borderColor: '#C1C0B9' }}>
+                            {
+                                tableData.map((rowData, index) => (
+                                    <TableWrapper widthArr={widthAtt}
+                                        style={[{ flexDirection: "row", height: 40, backgroundColor: '#E7E6E1' },
+                                        index % 2 && { backgroundColor: '#F7F6E7' }]}  >
+                                        {rowData.map((d, i) => (<Cell
+                                            width={widthAtt[i]}
+                                            key={i} data={d}
+                                            textStyle={{ textAlign: 'center', fontWeight: '100' }} />
+
+                                        ))}
+                                    </TableWrapper>
+                                ))
+                            }
+                        </Table>
+                    </ScrollView>
+                </View>
+            </ScrollView>
+
+
+
+
+            {Dimensions.get('window').width >= 700 ? add() : null}
         </View>)
     }
 
@@ -561,6 +599,7 @@ const styles = StyleSheet.create({
         flex: 1,
         minWidth: 100,
         flexDirection: "row",
+        height: 50,
         marginHorizontal: 4,
         alignItems: "center",
         justifyContent: "flex-start"
